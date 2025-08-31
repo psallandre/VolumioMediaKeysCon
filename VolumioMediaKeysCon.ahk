@@ -7,7 +7,7 @@
 #include httprequest.ahk
 #include JSON.ahk
 
-global URL := "http://myvolumio.local/api/v1/commands/"
+global URL := "http://volumio3.local/api/v1/commands/"
 
 CustomColor = EEAA99  ; Can be any RGB color (it will be made transparent below).
 Gui +LastFound +AlwaysOnTop -Caption +ToolWindow  ; +ToolWindow avoids a taskbar button and an alt-tab menu item.
@@ -30,22 +30,26 @@ DisplayInfo(responce, time) {
 RemoveWindow:
 	Gui, Hide
 
-Media_Play_Pause::
+^Media_Play_Pause::
 HTTPRequest(URL . "?cmd=toggle")
 return
 
-Media_Next::
+^Media_Next::
 HTTPRequest(URL . "?cmd=next")
 return
 
-Media_Prev::
+^Media_Prev::
 HTTPRequest(URL . "?cmd=prev")
 return
 
-Volume_Down::
+^Volume_Down::
     HTTPRequest(URL . "?cmd=volume&volume=minus")
 return
 
-Volume_Up::
+^Volume_Up::
     HTTPRequest(URL . "?cmd=volume&volume=plus")
+return
+
+^Volume_Mute::
+    HTTPRequest(URL . "?cmd=volume&volume=mute")
 return
